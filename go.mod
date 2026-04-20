@@ -1,4 +1,4 @@
-module github.com/agilezebra/jwt-middleware
+module github.com/fundarealestate/traefik-jwt-middleware
 
 go 1.25.4
 
