@@ -484,18 +484,19 @@ func (plugin *JWTPlugin) fetchAllKeys() {
 
 // fetchKeys fetches the keys from well-known jwks endpoint for the given issuer and adds them to the key map.
 func (plugin *JWTPlugin) fetchKeys(issuer string) error {
-	configURL := issuer + ".well-known/openid-configuration" // issuer has trailing slash
-	config, err := FetchOpenIDConfiguration(configURL, plugin.clientForURL(configURL))
+	// configURL := issuer + ".well-known/openid-configuration" // issuer has trailing slash
+	// config, err := FetchOpenIDConfiguration(configURL, plugin.clientForURL(configURL))
 
 	var url string
-	if err != nil {
-		// Fall back to direct JWKS URL if OpenID configuration fetch fails
-		url = issuer + ".well-known/jwks.json"
-		logger.Log("WARN", "failed to fetch openid-configuration from url:%s; falling back to direct JWKS URL:%s", configURL, url)
-	} else {
-		logger.Log("INFO", "fetched openid-configuration from url:%s", configURL)
-		url = config.JWKSURI
-	}
+	// if err != nil {
+	// 	// Fall back to direct JWKS URL if OpenID configuration fetch fails
+	// 	url = issuer + ".well-known/jwks.json"
+	// 	logger.Log("WARN", "failed to fetch openid-configuration from url:%s; falling back to direct JWKS URL:%s", configURL, url)
+	// } else {
+	// 	logger.Log("INFO", "fetched openid-configuration from url:%s", configURL)
+	// 	url = config.JWKSURI
+	// }
+	url := issuer
 
 	jwks, err := FetchJWKS(url, plugin.clientForURL(url))
 	if err != nil {
